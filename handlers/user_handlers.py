@@ -51,8 +51,8 @@ async def slot_handler(message: Message):
     
     if User.get_gamble_lasting_count(message.from_user.id) == 7:
         User.reset_gamble_lasting_count(message.from_user.id)
-        await message.chat.restrict(user_id=message.from_user.id, permissions=mute_perms, until_date=dt.timedelta(minutes=5))
-        await message.reply(emojize(":no_entry:Превышено максимальное количество фри спинов, пользователь замучен на 5 минут"))
+        await message.chat.restrict(user_id=message.from_user.id, permissions=mute_perms, until_date=dt.timedelta(minutes=1))
+        await message.reply(emojize(":no_entry:Превышено максимальное количество фри спинов, пользователь замучен на 1 минуту"))
         return
         
     await message.answer(emojize(f":slightly_frowning_face:{message.from_user.first_name} (@{message.from_user.username}) анлаки\nОсталось фри спинов: {7 - User.get_gamble_lasting_count(message.from_user.id)}"))
